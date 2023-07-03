@@ -1,6 +1,8 @@
-import Vue from 'vue'
 import { capitalizeFirstLetter, formatInteger } from '@/utils/helpers';
+import { defineNuxtPlugin } from 'nuxt/app';
 
-Vue.filter('capitalize', val => capitalizeFirstLetter(val));
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.filter('capitalize', val => capitalizeFirstLetter(val))
 
-Vue.filter('comma-separated', val => formatInteger(val));
+    vueApp.filter('comma-separated', val => formatInteger(val));
+})

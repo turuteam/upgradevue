@@ -1,4 +1,7 @@
-import Vue from 'vue'
+import { defineNuxtPlugin } from 'nuxt/app'
 
 const isDev = process.env.NODE_ENV !== "production"
-Vue.config.performance = isDev
+
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.config.performance = isDev
+})

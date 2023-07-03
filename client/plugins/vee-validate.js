@@ -1,8 +1,7 @@
-import Vue from 'vue';
 import axios from 'axios';
 import VeeValidate, { Validator } from 'vee-validate';
 import moment from 'moment';
-import { parsePhoneNumber, ParseError } from 'libphonenumber-js'
+import { parsePhoneNumber } from 'libphonenumber-js'
 
 import {
   emailRegex,
@@ -30,6 +29,7 @@ import {
   spotifyPodcastUrlRegex,
   spotifyPodcasterUrlRegex,
 } from '@/utils/regex/';
+import { defineNuxtPlugin } from 'nuxt/app';
 
 Validator.extend('googleTagManagerId', {
   getMessage: () => 'Google Tag Manager id is invalid',
@@ -328,7 +328,9 @@ Validator.extend('twitchUrl', {
   },
 });
 
-Vue.use(VeeValidate, {
-  events: 'change',
-  errorBagName: 'veeErrors',
-});
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.use(VeeValidate, {
+    events: 'change',
+    errorBagName: 'veeErrors'
+  })
+})

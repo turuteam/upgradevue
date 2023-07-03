@@ -1,6 +1,6 @@
-import Vue from 'vue';
 import { debounce } from 'debounce';
 import { mergeObjects } from '@/utils/helpers/';
+import { defineNuxtPlugin } from 'nuxt/app';
 
 window._arStickyTopItems = [];
 
@@ -137,6 +137,8 @@ const ARStickyTop = {
   },
 };
 
-export default ARStickyTop;
+// export default ARStickyTop;
 
-Vue.use(ARStickyTop);
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.use(ARStickyTop)
+})

@@ -1,4 +1,6 @@
-import Vue from 'vue';
 import PortalVue from 'portal-vue';
+import { defineNuxtPlugin } from 'nuxt/app';
 
-Vue.use(PortalVue);
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.use(PortalVue)
+})

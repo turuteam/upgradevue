@@ -1,4 +1,6 @@
-import Vue from 'vue';
+import { defineNuxtPlugin } from 'nuxt/app';
 import infiniteScroll from 'vue-infinite-scroll';
 
-Vue.use(infiniteScroll);
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.use(infiniteScroll)
+})

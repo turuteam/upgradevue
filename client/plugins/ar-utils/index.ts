@@ -6,6 +6,7 @@ import * as general from '@/utils/general';
 import * as email from '@/utils/email';
 import * as segment from '@/utils/segment';
 import * as tag from '@/utils/tag';
+import { defineNuxtPlugin } from 'nuxt/dist/app'
 
 const arUtils = {
   csv,
@@ -17,11 +18,11 @@ const arUtils = {
   tag,
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $arUtils: typeof arUtils;
-  }
-}
+// declare module 'vue/types/vue' {
+//   interface Vue {
+//     $arUtils: typeof arUtils;
+//   }
+// }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
@@ -35,8 +36,14 @@ declare module 'vuex/types/index' {
   }
 }
 
-const arUtilsPlugin: Plugin = (context, inject) => {
-  inject('arUtils', arUtils)
-};
+// const arUtilsPlugin: Plugin = (context, inject) => {
+//   inject('arUtils', arUtils)
+// };
 
-export default arUtilsPlugin;
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      arUtils
+    }
+  }
+});

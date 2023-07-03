@@ -1,4 +1,6 @@
-import Vue from 'vue';
+import { defineNuxtPlugin } from 'nuxt/app';
 import VueCroppie from 'vue-croppie';
 
-Vue.use(VueCroppie);
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.use(VueCroppie)
+})

@@ -9,31 +9,33 @@ dotenv.config();
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  head: {
-    title: 'Audience Republic',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#7344c0' },
-      { name: 'msapplication-navbutton-color', content: '#7344c0' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Set up campaigns to make your event go viral, driving sales to your existing ticketing provider.'
-      }
-    ],
-    link: [{ rel: 'shortcut icon', type: 'image/x-icon', href: 'https://cdn.arep.co/img/favicon/favicon.ico' }],
+  app: {
+    head: {
+      title: 'Audience Republic',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'theme-color', content: '#7344c0' },
+        { name: 'msapplication-navbutton-color', content: '#7344c0' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Set up campaigns to make your event go viral, driving sales to your existing ticketing provider.'
+        }
+      ],
+      link: [{ rel: 'shortcut icon', type: 'image/x-icon', href: 'https://cdn.arep.co/img/favicon/favicon.ico' }],
+    }
   },
   ssr: false,
   srcDir: 'client/',
   generate: {
-    minify: {
-      removeOptionalTags: false
-    },
+    // minify: {
+    //   removeOptionalTags: false
+    // },
     routes: [
       '/'
     ],
-    subFolders: false
+    // subFolders: false
   },
   ignore: [
     '**/__mocks__'
@@ -108,15 +110,15 @@ export default defineNuxtConfig({
   ],
   plugins: [
     { src: '~/plugins/arep-ui.js' },
-    { src: '~/plugins/ar-api/' },
+    { src: '~/plugins/ar-api/index.ts' },
     { src: '~/plugins/ar-components.js' },
     { src: '~/plugins/ar-ga.js', ssr: false },
     { src: '~/plugins/ar-hubspot.js' },
     { src: '~/plugins/ar-pendo.js' },
     { src: '~/plugins/ar-freshdesk.js' },
-    { src: '~/plugins/ar-feature-mask/' },
-    { src: '~/plugins/ar-notification/' },
-    { src: '~/plugins/ar-utils/' },
+    { src: '~/plugins/ar-feature-mask/index.js' },
+    { src: '~/plugins/ar-notification/index.ts' },
+    { src: '~/plugins/ar-utils/index.ts' },
     { src: '~/plugins/ar-hotkey' },
     { src: '~/plugins/ar-sticky-top.js' },
     { src: '~/plugins/ar-filters.js' },
@@ -133,87 +135,118 @@ export default defineNuxtConfig({
     { src: '~/plugins/v-tooltip.js' },
     { src: '~/plugins/v-click-outside.js' },
     { src: '~/plugins/is-browser.js' },
-    { src: '~/plugins/ar-web-worker/', ssr: false },
+    { src: '~/plugins/ar-web-worker/index.ts', ssr: false },
     { src: '~plugins/vue-input-autowidth.js', ssr: false },
     { src: '~plugins/vue-apexcharts.js', ssr: false },
+    { src: '~plugins/sentry.js' }
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/router', '@nuxtjs/style-resources', 'portal-vue/nuxt', '@nuxtjs/sentry'],
-  sentry: {
-    dsn: 'https://db7b76f4c7994408ae42fffd928bbe55@o4504867917529088.ingest.sentry.io/4504884952956928',
-    environment: process.env.AR_AM_ENVIRONMENT || 'development',
-    tracing: {
-      tracesSampleRate: 1.0,
-      browserTracing: {},
-      vueOptions: {
-        trackComponents: true,
-      },
-    },
-    clientIntegrations: {
-      CaptureConsole: { levels: ['warn', 'error'] },
-    },
-  },
-  styleResources: {
-    scss: [
-      path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/variables.scss'),
-      path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/functions.scss'),
-      path.resolve(__dirname, 'client/assets/styles/base/_variables.scss'),
-      path.resolve(__dirname, 'client/assets/styles/base/_functions.scss'),
-    ]
-  },
-
-  axios: {
-    baseURL: `${process.env.AR_AM_AUDIENCE_MANAGER_API_DOMAIN || 'https://dev1.arep.co'}${process.env.AR_AM_CAMPAIGN_API_BASE_URI_PREFIX || '/api/v1/cn'}`,
-    redirectError: {
-      401: '/authenticate/login'
+  // modules: ['@nuxtjs/axios', '@nuxtjs/router', '@nuxtjs/style-resources', 'portal-vue/nuxt', '@nuxtjs/sentry', '@nuxt/typescript-build', '@nuxtjs/svg'],
+  // sentry: {
+  //   dsn: 'https://db7b76f4c7994408ae42fffd928bbe55@o4504867917529088.ingest.sentry.io/4504884952956928',
+  //   environment: process.env.AR_AM_ENVIRONMENT || 'development',
+  //   tracing: {
+  //     tracesSampleRate: 1.0,
+  //     browserTracing: {},
+  //     vueOptions: {
+  //       trackComponents: true,
+  //     },
+  //   },
+  //   clientIntegrations: {
+  //     CaptureConsole: { levels: ['warn', 'error'] },
+  //   },
+  // },
+  // styleResources: {
+  //   scss: [
+  //     path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/variables.scss'),
+  //     path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/functions.scss'),
+  //     path.resolve(__dirname, 'client/assets/styles/base/_variables.scss'),
+  //     path.resolve(__dirname, 'client/assets/styles/base/_functions.scss'),
+  //   ]
+  // },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: [
+          path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/variables.scss'),
+          path.resolve(__dirname, 'node_modules/arep-ui/dist/styles/functions.scss'),
+          path.resolve(__dirname, 'client/assets/styles/base/_variables.scss'),
+          path.resolve(__dirname, 'client/assets/styles/base/_functions.scss'),
+        ]
+      }
     }
   },
 
-  meta: {
+  // axios: {
+  //   baseURL: `${process.env.AR_AM_AUDIENCE_MANAGER_API_DOMAIN || 'https://dev1.arep.co'}${process.env.AR_AM_CAMPAIGN_API_BASE_URI_PREFIX || '/api/v1/cn'}`,
+  //   redirectError: {
+  //     401: '/authenticate/login'
+  //   }
+  // },
+
+  $meta: {
     ogTitle: false,
     ogDescription: false
   },
 
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/svg'],
-
   typescript: {
-    typeCheck: {
-      // It takes so long to build, so let's disable it for now
-      eslint: {
-        files: './**/*.{ts}',
-        enabled: false
-      }
-    }
+    builder: false,
+    // typeCheck: {
+    //   // It takes so long to build, so let's disable it for now
+    //   eslint: {
+    //     files: './**/*.{ts}',
+    //     enabled: false
+    //   }
+    // }
+    typeCheck: true
   },
 
   /*
   ** Build configuration
   */
-  build: {
-    vendor : ['vue-apexchart'],
-    extend (config, { isClient }) {
-      // Extend only webpack config for client-bundle
-      if (isClient) {
-        config.devtool = '#source-map';
-        config.plugins.push(
-          // Ignore all locale files of moment.js
-          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-        );
-        config.module.rules.push({
-          test: /\.worker\.js$/,
-          loader: 'worker-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    },
+  // build: {
+  //   vendor : ['vue-apexchart'],
+  //   extend (config, { isClient }) {
+  //     // Extend only webpack config for client-bundle
+  //     if (isClient) {
+  //       config.devtool = '#source-map';
+  //       config.plugins.push(
+  //         // Ignore all locale files of moment.js
+  //         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  //       );
+  //       config.module.rules.push({
+  //         test: /\.worker\.js$/,
+  //         loader: 'worker-loader',
+  //         exclude: /(node_modules)/
+  //       })
+  //     }
+  //   },
+
+  // hooks: {
+  //   'vite:extendConfig': (config, {isClient}) => {
+  //     if(isClient) {
+  //       config.devtool = '#source-map';
+  //       config.plugins.push(
+  //         // Ignore all locale files of moment.js
+  //         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  //       );
+  //       config.module.rules.push({
+  //         test: /\.worker\.js$/,
+  //         loader: 'worker-loader',
+  //         exclude: /(node_modules)/
+  //       })
+  //     }
+  //   }
+  // },
 
     //parallel: true,
 
-    splitChunks: {
-      layouts: false, // Our layout chunks are very small, which makes no send to split it
-      pages: true, // TODO - this doesn't work, because we're not using the proper way to manage routes
-      commons: true
-    },
+    // splitChunks: {
+    //   layouts: false, // Our layout chunks are very small, which makes no send to split it
+    //   pages: true, // TODO - this doesn't work, because we're not using the proper way to manage routes
+    //   commons: true
+    // },
 
-    extractCSS: true,
-  }
+    webpack: {
+      extractCSS: true
+    }
 })

@@ -1,6 +1,8 @@
-import Vue from 'vue';
 import VTooltip from 'v-tooltip';
+import { defineNuxtPlugin } from 'nuxt/app';
 
-Vue.use(VTooltip, {
-  defaultBoundariesElement: 'window',
-});
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.use(VTooltip, {
+    defaultBoundariesElement: 'window'
+  })
+})

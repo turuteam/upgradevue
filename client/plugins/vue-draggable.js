@@ -1,5 +1,7 @@
-import Vue from 'vue'
+import { defineNuxtPlugin } from 'nuxt/app'
 import Draggable from 'vuedraggable'
-export default Draggable
+// export default Draggable
 
-Vue.use('draggable', Draggable)
+export default defineNuxtPlugin(({ vueApp }) => {
+    vueApp.use(Draggable)
+})
