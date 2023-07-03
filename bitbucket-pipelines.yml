@@ -1,0 +1,67 @@
+image:
+  name: atlassian/default-image:3
+
+definitions:
+  steps:
+    - step: &Install-deps
+        name: 'Install dependencies'
+        image: node:14.21.3
+        caches:
+          - node
+        script:
+          - yarn
+    - step: &Run-tests
+        name: 'Run unit tests'
+        image: node:14.21.3
+        caches:
+          - node
+        script:
+          - yarn test --verbose
+
+pipelines:
+  custom:
+    manual-deploy:
+      - variables:
+          - name: FeatureName
+          - name: ForceBranch
+            default: 0
+            allowed-values:
+              - 0
+              - 1
+      - step:
+          name: Deploy Feature Branch
+          deployment: feature
+          image: node:14.21.3
+          script:
+            - bash ./.cicd/install-dependencies.bash
+            - bash ./.cicd/build.bash $FeatureName $ForceBranch
+            - bash ./.cicd/deploy.bash $FeatureName $NETLIFY_TOKEN
+  branches:
+    '{develop}':
+      - step: *Install-deps
+      - step: *Run-tests
+    build/*:
+      - step:
+          name: Deploy Feature Branch
+          image: node:14.21.3
+          deployment: feature
+          script:
+            - bash ./.cicd/install-dependencies.bash
+            - bash ./.cicd/build.bash $BITBUCKET_BRANCH
+            - bash ./.cicd/deploy.bash $BITBUCKET_BRANCH $NETLIFY_TOKEN
+    '{staging}':
+      - step: *Install-deps
+      - step: *Run-tests
+      - step:
+          name: Deploy Staging
+          image: node:14.21.3
+          deployment: staging
+          script:
+            - bash ./.cicd/install-dependencies.bash
+            - bash ./.cicd/build.bash staging
+            - bash ./.cicd/deploy.bash staging $NETLIFY_TOKEN
+
+  pull-requests:
+    '**':
+      - step: *Install-deps
+      - step: *Run-tests

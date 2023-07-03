@@ -1,0 +1,36 @@
+/*
+Based off flexboxgrid2: https://github.com/evgenyrodionov/flexboxgrid2
+*/
+$xs-min: 0px;
+$sm-min: 576px;
+$md-min: 768px;
+$lg-min: 992px;
+$xl-min: 1200px;
+
+
+/*
+  All the variables below are exceptions, we will eventually remove them one day
+*/
+
+// Some exceptions, would like to get rid of them someday
+$dark-hover-overlay: rgba(31, 40, 68, 0.8);
+$orange-lite: rgba-to-rgb(rgba($orange500, 0.15));
+$red-lite: lighten($red500, 20%);
+$red-shadow: rgba($red500, 0.15);
+$shadow: #e4e5e7;
+$message-card-shadow: rgba($blueGrey800, 0.1);
+$eventbrite-orange: #f6682e;
+
+/*
+  This breakpoint is used for the campaign setup process.
+  Reason why it needs to be > xl-min is due to the preview pane.
+*/
+$visible-campaign-preview-min: 1515px;
+
+$content-gutter: 30px;
+
+/*
+  Height, width etc variables
+ */
+
+$sidebar_header_height: 56px;

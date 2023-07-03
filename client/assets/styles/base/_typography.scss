@@ -1,0 +1,20 @@
+p {
+  font-size: 1rem;
+  line-height: 25px;
+}
+
+p.large,
+.text-large {
+  font-size: 16px;
+}
+
+p.micro,
+.text-micro {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.text-title {
+  font-size: 0.9375rem;
+  font-weight: bold;
+}

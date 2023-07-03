@@ -1,0 +1,84 @@
+import {
+  createFeatureMaskInstance,
+  destroyFeatureMaskInstance,
+  updateFeatureMaskInstance,
+} from './index';
+
+describe('ar-feature-mask', () => {
+  describe('createFeatureMaskInstance', () => {
+    it('Shall create instance with right props and data', () => {
+      const fakeVlues = {
+        mode:'default',
+        show: true,
+        iconName: 'audience',
+        title: 'Title',
+        message: 'Message',
+        margin: {},
+      };
+      const fakeRouter = {};
+      const instance = createFeatureMaskInstance({
+        values: fakeVlues,
+        $store: {
+          watch: () => {},
+          getters: {
+            isFeatureEnabled: () => {},
+          },
+        },
+        $router: fakeRouter,
+      });
+
+      expect(instance.mode).toBe('default');
+      expect(instance.show).toBeTruthy();
+      expect(instance.iconName).toBe('audience');
+      expect(instance.title).toBe('Title');
+      expect(instance.message).toBe('Message');
+      expect(instance.margin).toMatchObject({
+        top: '0px',
+        right: '0px',
+        bottom: '0px',
+        left: '0px',
+      });
+    });
+  });
+  describe('updateFeatureMaskInstance', () => {
+    it('Shall update instance with right props', () => {
+      const fakeInstance = {};
+      const fakeVlues = {
+        mode:'default',
+        show: true,
+        iconName: 'audience',
+        title: 'Title',
+        message: 'Message',
+        margin: {},
+      };
+      updateFeatureMaskInstance({
+        instance: fakeInstance,
+        values: fakeVlues,
+      });
+
+      expect(fakeInstance.mode).toBe('default');
+      expect(fakeInstance.show).toBeTruthy();
+      expect(fakeInstance.iconName).toBe('audience');
+      expect(fakeInstance.title).toBe('Title');
+      expect(fakeInstance.message).toBe('Message');
+      expect(fakeInstance.margin).toMatchObject({
+        top: '0px',
+        right: '0px',
+        bottom: '0px',
+        left: '0px',
+      });
+    });
+  });
+  describe('destroyFeatureMaskInstance', () => {
+    it('Shall destroy instance correctly', () => {
+      const fakeInstance = {
+        $destroy: jest.fn(),
+      };
+      destroyFeatureMaskInstance({
+        instance: fakeInstance,
+      });
+
+      expect(fakeInstance.$destroy).toBeCalled();
+    });
+  });
+});

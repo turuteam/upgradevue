@@ -1,0 +1,70 @@
+# Terraform
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+.terraform.tfstate.lock.info
+terraform.tfstate.backup
+plan
+
+# artifacts
+app.zip
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# Yarn
+yarn-error.log
+
+# Ignore generated service workers
+client/static/sw.js
+client/static/workbox-sw.prod*
+
+# OS generated files
+.DS_Store
+
+# Ignore .env
+.env
+
+# VS Code
+.vscode
+
+# Jest default coverage folder
+coverage
+
+# Jest dashboard code coverage reports
+html-report
+jest-html-reporters-attach
+jest_html_reporters.html
+
+# for running tests pre-commit
+.husky
+
+# dccache
+.dccache
+
+# hidden files for clojure development
+.lsp/.cache/db.transit.json
+.clj-kondo/.cache/v1/lock
+# Webstorm-generated files
+.idea
+
+# debugging config local to each dev's environment
+launch.json
+
+# avoid the Snyk system file
+.dccache
+
+# clj-kondo
+.clj-kondo
+
+# lsp
+.lsp/

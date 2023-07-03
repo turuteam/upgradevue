@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 8</title>
+    <g id="Phase-1---Step-1-(campaign-details)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Step-1" transform="translate(-86.000000, -1532.000000)">
+            <g id="Group-8" transform="translate(86.000000, 1532.000000)">
+                <path d="M20.34375,0 L0.65625,0 C0.2625,0 0,0.2625 0,0.65625 L0,20.34375 C0,20.7375 0.2625,21 0.65625,21 L20.34375,21 C20.7375,21 21,20.7375 21,20.34375 L21,0.65625 C21,0.2625 20.7375,0 20.34375,0 Z" id="Shape" fill="#B4B9C4" fill-rule="nonzero"></path>
+                <polygon id="Rectangle" fill="#FFFFFF" points="18 6.52618454 18 13.5087282 14.4942709 11.5644673 14.4942709 8.47249152"></polygon>
+                <path d="M5.03491272,6.52618454 L12.6606227,6.52618454 C13.2129074,6.52618454 13.6606227,6.97389979 13.6606227,7.52618454 L13.6606227,12.5087282 C13.6606227,13.0610129 13.2129074,13.5087282 12.6606227,13.5087282 L5.03491272,13.5087282 C4.48262797,13.5087282 4.03491272,13.0610129 4.03491272,12.5087282 L4.03491272,7.52618454 C4.03491272,6.97389979 4.48262797,6.52618454 5.03491272,6.52618454 Z" id="Rectangle" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="395" height="780" viewBox="0 0 395 780">
+  <defs>
+    <rect id="mobile-preview-pane-a" width="375" height="660" x="10" y="60" rx="5"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="395" height="780" fill="#EDF1F5" rx="40"/>
+    <circle cx="198" cy="748" r="19" fill="#EDF1F5" stroke="#DCDEE4" stroke-width="2"/>
+    <rect width="55" height="10" x="170" y="25" fill="#DCDEE4" rx="5"/>
+    <use fill="#FFF" xlink:href="#mobile-preview-pane-a"/>
+  </g>
+</svg>
