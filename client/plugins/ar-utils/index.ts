@@ -18,11 +18,11 @@ const arUtils = {
   tag,
 }
 
-// declare module 'vue/types/vue' {
-//   interface Vue {
-//     $arUtils: typeof arUtils;
-//   }
-// }
+declare module 'nuxt/app' {
+  interface NuxtApp {
+    $arUtils: typeof arUtils;
+  }
+}
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {

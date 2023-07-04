@@ -1,7 +1,7 @@
+import { defineNuxtPlugin } from 'nuxt/app'
 import InitialEventSalesDataWorker  from  './initial-event-sales-data.worker'
 import OverlaySalesQuantityWorker  from  './overlay-sales-quantity.worker'
 import OverlayTimescaleDataWorker  from  './overlay-timescale-data.worker.js'
-import { Plugin } from '@nuxt/types'
 
 const workerPlugin = {
   createInitialEventSalesDataWorker() {
@@ -18,8 +18,8 @@ const workerPlugin = {
   },
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
+declare module 'nuxt/app' {
+  interface NuxtApp {
     $arWorker: typeof workerPlugin
   }
 }
@@ -36,8 +36,10 @@ declare module 'vuex/types/index' {
   }
 }
 
-const webWorkerPlugin: Plugin = (context, inject) => {
-  inject('arWorker', workerPlugin)
-}
-
-export default webWorkerPlugin
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      workerPlugin
+    }
+  }
+})

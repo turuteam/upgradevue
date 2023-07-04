@@ -1,3 +1,5 @@
+import { defineNuxtPlugin } from "nuxt/app";
+
 let isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
 let isFirefox = typeof InstallTrigger !== 'undefined'
 let isSafari = /letructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification))
@@ -18,9 +20,10 @@ const browsers = {
   isBlink,
 }
 
-export default (ctx, inject) => {
-  // inject the api in the context (ctx.app.$browser)
-  // And in the Vue instances and store (this.$browser)
-
-  inject('browser', browsers)
-}
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      browser: browsers
+    }
+  }
+})

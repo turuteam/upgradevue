@@ -15,8 +15,8 @@ const plugin: Plugin = (context: any, inject: any): any => {
   return factories;
 };
 
-declare module 'vue/types/vue' {
-  interface Vue {
+declare module 'nuxt/app' {
+  interface NuxtApp {
     $api: ReturnType<typeof createAPIs>;
   }
 }

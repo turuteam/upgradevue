@@ -1,9 +1,6 @@
 import { defineNuxtPlugin } from 'nuxt/app'
-import Vue from 'vue'
-import VueApexCharts from 'vue-apexcharts'
-
-Vue.component('apexcharts', VueApexCharts)
+import VueApexCharts from 'vue3-apexcharts'
 
 export default defineNuxtPlugin(({ vueApp }) => {
-    vueApp.component('apexcharts', VueApexCharts)
+    vueApp.use(VueApexCharts)
 })

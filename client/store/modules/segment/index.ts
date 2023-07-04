@@ -17,6 +17,10 @@ import {
   generateScratchSegmentFromTag,
   generateScratchSegmentFromMessageSegment,
 } from './utils';
+import { useNuxtApp } from "nuxt/app";
+
+const nuxtApp = useNuxtApp()
+
 export const initialSegmentState = (): SegmentState => ({
   segmentCriteriaGroups: [],
   segmentCriteriaMap: {},
@@ -235,8 +239,8 @@ const segmentModule: Module<SegmentState, RootState> = {
         }
       }
 
-      const newCondition: SegmentCondition = window.$nuxt.$arUtils.segment.generateSegmentCondition(segmentCriteria, state.scratchSegmentInfo.source);
-
+      const newCondition: SegmentCondition = nuxtApp.$arUtils.segment.generateSegmentCondition(segmentCriteria, state.scratchSegmentInfo.source);
+      
       newScratchSegment.filter.conditions[newScratchSegment.filter.conditions.length] = newCondition;
 
       state.scratchSegment = newScratchSegment;

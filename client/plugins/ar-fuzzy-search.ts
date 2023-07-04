@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import { Plugin } from '@nuxt/types'
+import { defineNuxtPlugin } from 'nuxt/app';
 
 const fuzzySearch = (list: string, string: string) => {
   let listItem = list.toLowerCase();
@@ -14,8 +13,8 @@ const fuzzySearch = (list: string, string: string) => {
 };
 
 
-declare module 'vue/types/vue' {
-  interface Vue {
+declare module 'nuxt/app' {
+  interface NuxtApp {
     $arFuzzySearch: typeof fuzzySearch;
   }
 }
@@ -32,8 +31,10 @@ declare module 'vuex/types/index' {
   }
 }
 
-const fuzzySearchPlugin: Plugin = (context, inject) => {
-  inject('arFuzzySearch', fuzzySearch);
-}
-
-export default fuzzySearchPlugin;
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      fuzzySearch
+    }
+  }
+});

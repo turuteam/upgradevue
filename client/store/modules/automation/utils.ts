@@ -1,6 +1,9 @@
+import { useNuxtApp } from "nuxt/app";
 import { AutomationResetState, UITrigger, UIAction, AutomationBox } from "./types";
 
 // TODO: some of these functions may not be needed
+
+const nuxtApp = useNuxtApp()
 
 export function getAutomationAction(actions: any[], id: number | string) {
   let found = null
@@ -41,7 +44,7 @@ export function getActionBlock(boxes: any, id: number) {
 }
 
 export async function getTriggers(data: any, promoterOid: number, automationOid: number): Promise<any> {
-  let api = window.$nuxt.$api
+  let api = nuxtApp.$api
   let triggers: any = []
   let arr = Object.entries(data)
   let count = 0
@@ -202,7 +205,7 @@ export async function getTriggers(data: any, promoterOid: number, automationOid:
 }
 
 export async function formattedAPIBox(box: any, promoterOid: number, automationOid: number): Promise<any> {
-  let api = window.$nuxt.$api
+  let api = nuxtApp.$api
   let actionBox: AutomationBox
 
   try {

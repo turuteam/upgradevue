@@ -111,7 +111,6 @@ export default defineNuxtConfig({
   plugins: [
     { src: '~/plugins/arep-ui.js' },
     { src: '~/plugins/ar-api/index.ts' },
-    { src: '~/plugins/ar-components.js' },
     { src: '~/plugins/ar-ga.js', ssr: false },
     { src: '~/plugins/ar-hubspot.js' },
     { src: '~/plugins/ar-pendo.js' },

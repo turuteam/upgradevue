@@ -1,16 +1,8 @@
-import Vue from 'vue';
-import { Plugin } from '@nuxt/types'
 import { generateHash } from '@/utils/helpers/';
 
 // @ts-ignore
 import NotificationCaster from './NotificationCaster';
-
-export const createNotificationCaster = () => {
-  const instance = new Vue(NotificationCaster);
-  instance.$mount();
-
-  return instance;
-};
+import { defineNuxtPlugin } from 'nuxt/app';
 
 type PushArgs = {
   type: string;
@@ -47,8 +39,8 @@ const push = ({ type, message, link, width, timeout }: PushArgs) => {
   });
 };
 
-declare module 'vue/types/vue' {
-  interface Vue {
+declare module 'nuxt/app' {
+  interface NuxtApp {
     $arNotification: {
       push: (args: PushArgs) => {};
     };
@@ -71,15 +63,14 @@ declare module 'vuex/types/index' {
   }
 }
 
-const arNotificationPlugin: Plugin = (context, inject) => {
+export default defineNuxtPlugin(({ vueApp }) => {
   // Mount our notification caster to html body
-  const notificationCasterInstance = createNotificationCaster();
+  const notificationCasterInstance = vueApp.mount(NotificationCaster)
   document.body.appendChild(notificationCasterInstance.$el);
 
-  // @ts-ignore
-  inject('arNotification', {
-    push,
-  });
-}
-
-export default arNotificationPlugin;
+  return {
+    provide: {
+      push
+    }
+  }
+});

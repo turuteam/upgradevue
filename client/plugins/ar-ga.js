@@ -1,6 +1,11 @@
 /* eslint-disable */
 
-export default ({ app }) => {
+import { defineNuxtPlugin } from "nuxt/app";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
+
+export default defineNuxtPlugin(() => {
   /*
   ** Only run on client-side and only in production mode
   */
@@ -17,7 +22,7 @@ export default ({ app }) => {
   /*
   ** Every time the route changes (fired on initialization too)
   */
-  app.router.afterEach((to, from) => {
+  router.afterEach((to) => {
     /*
     ** We tell Google Analytics to add a `pageview`
     */
@@ -32,4 +37,4 @@ export default ({ app }) => {
       });
     }
   })
-}
+})

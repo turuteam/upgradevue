@@ -1,7 +1,10 @@
 import LeaderLine from 'leader-line-new'
+import { defineNuxtPlugin } from 'nuxt/app'
 
-const leaderLinePlugin = (context, inject) => {
-  inject('leaderLine', LeaderLine)
-}
-
-export default leaderLinePlugin
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      leaderLine: LeaderLine
+    }
+  } 
+})

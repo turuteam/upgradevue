@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { defineNuxtPlugin } from 'nuxt/app';
 
 const keydownListener = function(e) {
   if (this.hotkeyDisabled) {
@@ -81,6 +81,6 @@ const ARHotkey = {
   },
 };
 
-export default ARHotkey;
-
-Vue.use(ARHotkey);
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.use(ARHotkey)
+});
